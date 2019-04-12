@@ -14,7 +14,11 @@ import { SectionListItem } from './SectionListItem';
 let toast = null;
 
 export function AlphabetListView({
-  contentHeight, pageY, titles, onSelect, selectAlphabet
+  contentHeight,
+  pageY,
+  titles,
+  onSelect,
+  selectAlphabet
 }) {
   const itemHeight = contentHeight / titles.length;
 
@@ -22,11 +26,17 @@ export function AlphabetListView({
     const event = evt.nativeEvent || {};
     const index = Math.floor((event.pageY - pageY) / itemHeight);
 
+    // console.log('AlphabetListView.onTouchChange()', event.pageY, index, type);
+
+    if (index < 0) {
+      return;
+    }
+
     if (toast) {
       setTimeout(() => {
         toast && Toast.hide(toast);
         toast = null;
-      }, 200);
+      }, 100);
     }
     if (type === 'Move') {
       toast = Toast.show(`${titles[index]}`, {
@@ -39,7 +49,7 @@ export function AlphabetListView({
           width: 70,
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: 'rgba(0,0,0,0.7)'
+          backgroundColor: 'rgba(0,0,0,0.5)'
         },
         textStyle: {
           color: 'white',
@@ -61,7 +71,7 @@ export function AlphabetListView({
     onPanResponderTerminationRequest: () => true,
     onPanResponderGrant: evt => onTouchChange(evt, 'Grant'),
     // onPanResponderStart: evt => onTouchChange(evt, 'Start'),
-    onPanResponderMove: evt => onTouchChange(evt, 'Move'),
+    onPanResponderMove: evt => onTouchChange(evt, 'Move')
     // onPanResponderEnd: evt => onTouchChange(evt, 'End'),
     // onPanResponderRelease: evt => onTouchChange(evt, 'Release')
   });

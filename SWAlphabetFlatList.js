@@ -6,9 +6,7 @@
  * Desc: 自定义带字母的滚动列表
  */
 import React, { Component } from 'react';
-import {
-  View, FlatList, InteractionManager
-} from 'react-native';
+import { View, FlatList, InteractionManager } from 'react-native';
 import PropTypes from 'prop-types';
 import { SectionHeader } from './SectionHeader';
 import { AlphabetListView } from './AlphabetListView';
@@ -35,13 +33,16 @@ export class SWAlphabetFlatList extends Component {
     itemHeight: PropTypes.number.isRequired,
     renderItem: PropTypes.func.isRequired,
     sectionHeaderHeight: PropTypes.number,
-    sectionHeaderComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    sectionHeaderComponent: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.func
+    ])
   };
 
   static defaultProps = {
     sectionHeaderHeight: SectionHeader.height,
     sectionHeaderComponent: SectionHeader
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -55,7 +56,7 @@ export class SWAlphabetFlatList extends Component {
       itemLayout: {},
       titles: [],
       selectAlphabet: null,
-      pageY: 0, // 相对于屏幕的Y坐标
+      pageY: 0 // 相对于屏幕的Y坐标
     };
   }
 
@@ -76,16 +77,20 @@ export class SWAlphabetFlatList extends Component {
   refreshBaseData = (data) => {
     const titles = Object.keys(data);
 
-    const offset = (index, itemLength) => index * this.props.sectionHeaderHeight + itemLength * this.props.itemHeight;
+    const offset = (index, itemLength) => index * this.props.sectionHeaderHeight
+      + itemLength * this.props.itemHeight;
 
     const itemLayout = titles.map((title, index) => {
-      const beforeItemLength = titles.slice(0, index).reduce((length, item) => length + data[item].length, 0);
+      const beforeItemLength = titles
+        .slice(0, index)
+        .reduce((length, item) => length + data[item].length, 0);
       const itemLength = data[title].length;
       return {
         title,
         itemLength,
         beforeItemLength,
-        length: this.props.sectionHeaderHeight + this.props.itemHeight * itemLength,
+        length:
+          this.props.sectionHeaderHeight + this.props.itemHeight * itemLength,
         offset: offset(index, beforeItemLength)
       };
     });
@@ -95,7 +100,7 @@ export class SWAlphabetFlatList extends Component {
       titles,
       selectAlphabet: titles[0]
     });
-  }
+  };
 
   /**
    * 获取列表区域高度，用于计算字母列表的显示
@@ -109,7 +114,7 @@ export class SWAlphabetFlatList extends Component {
     this.setState({
       containerHeight: layout && layout.height
     });
-  }
+  };
 
   /**
    * 点击字母触发滚动
@@ -122,7 +127,7 @@ export class SWAlphabetFlatList extends Component {
         selectAlphabet: this.state.titles[index]
       });
     });
-  }
+  };
 
   /**
    * 可视范围内元素变化时改变所选字母
@@ -131,7 +136,7 @@ export class SWAlphabetFlatList extends Component {
   onViewableItemsChanged = ({ viewableItems }) => {
     if (viewableItems && viewableItems.length) {
       // 点击字母触发的滚动3秒内不响应
-      if ((new Date().getTime() - this.touchedTime) < 3000) {
+      if (new Date().getTime() - this.touchedTime < 3000) {
         return;
       }
       InteractionManager.runAfterInteractions(() => {
@@ -140,13 +145,13 @@ export class SWAlphabetFlatList extends Component {
         });
       });
     }
-  }
+  };
 
   getItemLayout = (data, index) => ({
     length: this.state.itemLayout[index].length,
     offset: this.state.itemLayout[index].offset,
     index
-  })
+  });
 
   renderItem = ({ item }) => {
     const MSectionHeader = this.props.sectionHeaderComponent;
@@ -154,10 +159,10 @@ export class SWAlphabetFlatList extends Component {
     return (
       <View>
         <MSectionHeader title={item} />
-        {this.props.data[item].map((itemValue) => this.props.renderItem({ item: itemValue }))}
+        {this.props.data[item].map(itemValue => this.props.renderItem({ item: itemValue }))}
       </View>
     );
-  }
+  };
 
   render() {
     return (

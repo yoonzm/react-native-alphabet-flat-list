@@ -9,9 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View, Text } from 'react-native';
 
-export function SectionListItem({
-  title, height, active = false
-}) {
+export function SectionListItem({ title, height, active = false }) {
   return (
     <View
       style={{
@@ -50,5 +48,5 @@ export function SectionListItem({
 SectionListItem.propTypes = {
   title: PropTypes.string,
   height: PropTypes.number,
-  active: PropTypes.bool,
+  active: PropTypes.bool
 };
