@@ -1,0 +1,40 @@
+{
+  "name": "react-native-alphabet-flat-list",
+  "version": "0.0.1",
+  "description": "使用FlatList制作的react-native字母选择列表",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yoonzm/react-native-alphabet-flat-list.git"
+  },
+  "keywords": [
+    "react-native",
+    "alphabet",
+    "flat",
+    "list"
+  ],
+  "author": "yoonzm",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yoonzm/react-native-alphabet-flat-list/issues"
+  },
+  "homepage": "https://github.com/yoonzm/react-native-alphabet-flat-list#readme",
+  "dependencies": {
+    "prop-types": "^15.5.10",
+    "react-native-root-toast": "3.0.1"
+  },
+  "devDependencies": {
+    "react-native": "0.56.0",
+    "react": "16.4.1"
+  },
+  "peerDependencies": {
+    "react": ">=16.0.0",
+    "react-native": ">=0.48.4"
+  }
+}
