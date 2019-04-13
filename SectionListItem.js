@@ -34,7 +34,6 @@ export function SectionListItem({ title, height, active = false }) {
             fontSize: 11,
             color: active ? 'white' : '#333',
             textAlign: 'center',
-            fontFamily: 'PingFangSC-Regular',
             fontWeight: 'bold'
           }}
         >

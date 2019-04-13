@@ -51,8 +51,7 @@ export function AlphabetListView({
           textStyle: {
             color: 'white',
             fontSize: 35,
-            fontWeight: 'bold',
-            fontFamily: 'PingFangSC-Regular'
+            fontWeight: 'bold'
           }
         });
       }
