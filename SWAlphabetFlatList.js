@@ -6,10 +6,14 @@
  * Desc: 自定义带字母的滚动列表
  */
 import React, { Component } from 'react';
-import { View, FlatList, InteractionManager } from 'react-native';
+import {
+  View, FlatList, InteractionManager, Dimensions
+} from 'react-native';
 import PropTypes from 'prop-types';
 import { SectionHeader } from './SectionHeader';
 import { AlphabetListView } from './AlphabetListView';
+
+const screenHeight = Dimensions.get('window').height;
 
 export class SWAlphabetFlatList extends Component {
   static propTypes = {
@@ -52,10 +56,11 @@ export class SWAlphabetFlatList extends Component {
      */
     this.touchedTime = 0;
     this.state = {
-      containerHeight: 0,
-      itemLayout: {},
+      containerHeight: screenHeight,
+      itemLayout: [],
       titles: [],
       selectAlphabet: null,
+      initialNumToRender: 0,
       pageY: 0 // 相对于屏幕的Y坐标
     };
   }
@@ -95,10 +100,19 @@ export class SWAlphabetFlatList extends Component {
       };
     });
 
+    // 计算首屏渲染的数量 避免出现空白区域
+    let initialNumToRender = itemLayout.findIndex(
+      item => item.offset >= this.state.containerHeight
+    );
+    if (initialNumToRender < 0) {
+      initialNumToRender = titles.length;
+    }
+
     this.setState({
       itemLayout,
       titles,
-      selectAlphabet: titles[0]
+      selectAlphabet: titles[0],
+      initialNumToRender
     });
   };
 
@@ -106,9 +120,12 @@ export class SWAlphabetFlatList extends Component {
    * 获取列表区域高度，用于计算字母列表的显示
    */
   onLayout = ({ nativeEvent: { layout } }) => {
-    this.container.measure((x, y, w, h, px, py) => {
-      this.setState({
-        pageY: py
+    // 保证导航动画完成之后在进行获取位置坐标 否则会不准确
+    InteractionManager.runAfterInteractions(() => {
+      this.container.measure((x, y, w, h, px, py) => {
+        this.setState({
+          pageY: py
+        });
       });
     });
     this.setState({
@@ -159,7 +176,11 @@ export class SWAlphabetFlatList extends Component {
     return (
       <View>
         <MSectionHeader title={item} />
-        {this.props.data[item].map(itemValue => this.props.renderItem({ item: itemValue }))}
+        {this.props.data[item].map((itemValue, itemIndex, items) => this.props.renderItem({
+          item: itemValue,
+          index: itemIndex,
+          last: itemIndex === items.length - 1
+        }))}
       </View>
     );
   };
@@ -167,6 +188,9 @@ export class SWAlphabetFlatList extends Component {
   render() {
     return (
       <View
+        style={{
+          flex: 1
+        }}
         ref={(ref) => {
           this.container = ref;
         }}
@@ -181,7 +205,7 @@ export class SWAlphabetFlatList extends Component {
           renderItem={this.renderItem}
           keyExtractor={(item, index) => index}
           getItemLayout={this.getItemLayout}
-          initialNumToRender={2}
+          initialNumToRender={this.state.initialNumToRender}
           onViewableItemsChanged={this.onViewableItemsChanged}
         />
         <AlphabetListView

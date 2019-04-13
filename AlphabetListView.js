@@ -28,38 +28,36 @@ export function AlphabetListView({
 
     // console.log('AlphabetListView.onTouchChange()', event.pageY, index, type);
 
-    if (index < 0) {
-      return;
+    if (index >= 0) {
+      if (toast) {
+        setTimeout(() => {
+          toast && Toast.hide(toast);
+          toast = null;
+        }, 100);
+      }
+      if (type === 'Move') {
+        toast = Toast.show(`${titles[index]}`, {
+          position: Toast.positions.CENTER,
+          duration: 1000,
+          shadow: false,
+          opacity: 1,
+          containerStyle: {
+            height: 70,
+            width: 70,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'rgba(0,0,0,0.5)'
+          },
+          textStyle: {
+            color: 'white',
+            fontSize: 35,
+            fontWeight: 'bold',
+            fontFamily: 'PingFangSC-Regular'
+          }
+        });
+      }
+      onSelect && onSelect(index);
     }
-
-    if (toast) {
-      setTimeout(() => {
-        toast && Toast.hide(toast);
-        toast = null;
-      }, 100);
-    }
-    if (type === 'Move') {
-      toast = Toast.show(`${titles[index]}`, {
-        position: Toast.positions.CENTER,
-        duration: 1000,
-        shadow: false,
-        opacity: 1,
-        containerStyle: {
-          height: 70,
-          width: 70,
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: 'rgba(0,0,0,0.5)'
-        },
-        textStyle: {
-          color: 'white',
-          fontSize: 35,
-          fontWeight: 'bold',
-          fontFamily: 'PingFangSC-Regular'
-        }
-      });
-    }
-    onSelect && onSelect(index);
   };
 
   const responder = PanResponder.create({
