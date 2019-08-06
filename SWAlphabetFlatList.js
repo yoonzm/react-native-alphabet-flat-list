@@ -203,7 +203,7 @@ export class SWAlphabetFlatList extends Component {
           {...this.props}
           data={this.state.titles}
           renderItem={this.renderItem}
-          keyExtractor={(item, index) => index}
+          keyExtractor={(item, index) => `${index}`}
           getItemLayout={this.getItemLayout}
           initialNumToRender={this.state.initialNumToRender}
           onViewableItemsChanged={this.onViewableItemsChanged}
