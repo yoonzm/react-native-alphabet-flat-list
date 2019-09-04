@@ -26,12 +26,11 @@
   },
   "homepage": "https://github.com/yoonzm/react-native-alphabet-flat-list#readme",
   "dependencies": {
-    "prop-types": "^15.5.10",
     "react-native-root-toast": "3.0.1"
   },
   "devDependencies": {
-    "react-native": "0.56.0",
-    "react": "16.4.1"
+    "react-native": "0.60.5",
+    "react": "16.8.6"
   },
   "peerDependencies": {
     "react": ">=16.0.0",

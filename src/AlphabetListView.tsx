@@ -7,8 +7,9 @@
  */
 
 import React, {PureComponent} from 'react';
-import {GestureResponderEvent, PanResponder, PanResponderGestureState, PanResponderInstance, View} from 'react-native';
+import {GestureResponderEvent, PanResponder, PanResponderGestureState, PanResponderInstance, View, InteractionManager} from 'react-native';
 import SectionListItem from './SectionListItem';
+import Toast from "./Toast";
 
 interface IProps {
   contentHeight: number;
@@ -16,6 +17,7 @@ interface IProps {
   pageY: number;
   titles: string[];
   onSelect: (index: number) => void;
+  alphabetToast: boolean;
 }
 
 const initState = {
@@ -39,7 +41,7 @@ class AlphabetListView extends PureComponent<IProps, State> {
     this.initData(props);
   }
 
-  public updateSelectAlphabet(selectAlphabet:string) {
+  public updateSelectAlphabet(selectAlphabet: string) {
     this.setState({
       selectAlphabet: selectAlphabet,
     })
@@ -61,6 +63,11 @@ class AlphabetListView extends PureComponent<IProps, State> {
     if (index >= 0 && index <= (this.props.titles.length - 1)) {
       this.props.onSelect && this.props.onSelect(index);
       this.updateSelectAlphabet(this.props.titles[index]);
+      if (this.props.alphabetToast) {
+        InteractionManager.runAfterInteractions(() => {
+          Toast.show(this.props.titles[index]);
+        });
+      }
     }
   };
 

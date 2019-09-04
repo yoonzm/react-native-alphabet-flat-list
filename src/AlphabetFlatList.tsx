@@ -38,12 +38,14 @@ export interface IProps<ItemT> {
   sectionHeaderHeight?: number;
   renderSectionHeader?: ListRenderSectionHeader<SectionHeaderIProps>;
   ListHeaderComponent?: React.ComponentType<any> | React.ReactElement | null;
+  alphabetToast?: boolean;
 }
 
 const defaultProps = {
   headerHeight: 0,
   sectionHeaderHeight: sectionHeaderHeight,
-  renderSectionHeader: SectionHeader
+  renderSectionHeader: SectionHeader,
+  alphabetToast: true
 };
 
 export interface IState {
@@ -234,6 +236,7 @@ export default class AlphabetFlatList<ItemT> extends Component<IProps<ItemT>, IS
           contentHeight={this.state.containerHeight - this.props.headerHeight!}
           titles={this.state.titles}
           onSelect={this.onSelect}
+          alphabetToast={this.props.alphabetToast}
         />
       </View>
     )
