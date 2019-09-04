@@ -2,7 +2,7 @@
   "name": "@yoonzm/react-native-alphabet-flat-list",
   "version": "0.0.1",
   "description": "使用FlatList制作的react-native字母选择列表",
-  "main": "index.js",
+  "main": "old/index.js",
   "directories": {
     "example": "example"
   },
