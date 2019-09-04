@@ -58,6 +58,12 @@ const App = () => {
 - **`sectionHeaderHeight`**_(Number)_ - sectionHeader height; default is 25
 - **`sectionHeaderComponent`**_(Component)_ - sectionHeader
 
+## Download
+
+| 类型          | 二维码                                      |
+| ----------- | ---------------------------------------- |
+| **Apk二维码**  | ![](https://github.com/yoonzm/react-native-alphabet-flat-list/blob/master/download.png) |
+| **IOS暂无下载** |  |
 
 ## License
 
