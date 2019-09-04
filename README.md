@@ -16,34 +16,40 @@
 
 ## Example
 ```jsx
-import React, { Component } from 'react';
-import { Text, View } from 'react-native';
-import SWAlphabetFlatList from '@yoonzm/react-native-alphabet-flat-list';
+import React, {Fragment} from 'react';
+import {StatusBar, Text, View} from 'react-native';
+import AlphabetFlatList from "react-native-alphabet-flat-list";
+import ContactItem, {CONTACT_ITEM_HEIGHT, IContact} from "./ContactItem";
 
-const CONTACTS = {
-  A: ['Any', 'Avatar'],
-  B: ['Basketball', 'Big']
-};
+...
 
-const ITEM_HEIGHT = 50;
+const HEADER_HEIGHT = 50;
 
-class Example extends Component {
-  render() {
-    return (
-      <SWAlphabetFlatList
-        data={CONTACTS}
-        renderItem={({ item }) => (
-          <View style={{ height: ITEM_HEIGHT }}>
-            <Text>{item}</Text>
+const App = () => {
+  return (
+    <Fragment>
+      <StatusBar barStyle="dark-content"/>
+      <AlphabetFlatList<IContact>
+        data={data}
+        itemHeight={CONTACT_ITEM_HEIGHT}
+        headerHeight={HEADER_HEIGHT}
+        renderItem={ContactItem}
+        ListHeaderComponent={(
+          <View style={{
+            height: HEADER_HEIGHT,
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}>
+            <Text>ListHeaderComponent</Text>
           </View>
         )}
-        itemHeight={ITEM_HEIGHT}
       />
-    );
-  }
-}
+    </Fragment>
+  );
+};
 
 ```
+[Detail](./example/App.tsx)
 
 ## Props
 - **`data`**_(Object)_ [isRequire] - listData to display
