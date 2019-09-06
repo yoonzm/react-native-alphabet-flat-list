@@ -9,6 +9,6 @@
 import React, {Component} from "react";
 import {IProps} from './src/AlphabetFlatList'
 
-export default class AlphabetFlatList<ItemT> extends React.Component<IProps<ItemT>> {
+export default class extends React.Component<IProps<any>> {
 
 }
