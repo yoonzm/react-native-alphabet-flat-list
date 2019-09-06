@@ -1,13 +1,14 @@
 {
   "name": "@yoonzm/react-native-alphabet-flat-list",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "使用FlatList制作的react-native字母选择列表",
-  "main": "old/index.js",
+  "main": "built/index.js",
+  "types": "built/index.d.ts",
   "directories": {
     "example": "example"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc ./src/* --outDir built -m es2015"
   },
   "repository": {
     "type": "git",
