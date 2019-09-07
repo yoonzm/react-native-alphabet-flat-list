@@ -56,7 +56,9 @@ const App = () => {
 - **`itemHeight`**_(Number)_ [isRequire] - itemComponent height
 - **`renderItem`**_(Function)_ [isRequire] - itemComponent render
 - **`sectionHeaderHeight`**_(Number)_ - sectionHeader height; default is 25
-- **`sectionHeaderComponent`**_(Component)_ - sectionHeader
+- **`renderSectionHeader`**_(Function)_ - sectionHeader
+- **`ListHeaderComponent`**_(Function)_ - ListHeader
+- **`alphabetToast`**_(Boolean)_ - click on the letter to prompt
 
 ## Download
 
