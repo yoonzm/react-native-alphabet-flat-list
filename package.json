@@ -8,7 +8,7 @@
     "example": "example"
   },
   "scripts": {
-    "build": "tsc ./src/* --outDir built -m es2015"
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -30,8 +30,11 @@
     "react-native-root-toast": "3.0.1"
   },
   "devDependencies": {
+    "@types/react-native": "0.60.5",
+    "@types/react": "16.8.6",
     "react-native": "0.60.5",
-    "react": "16.8.6"
+    "react": "16.8.6",
+    "typescript": "^3.7.2"
   },
   "peerDependencies": {
     "react": ">=16.0.0",

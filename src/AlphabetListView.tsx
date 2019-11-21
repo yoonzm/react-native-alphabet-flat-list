@@ -6,7 +6,8 @@
  * Desc: 字母列表
  */
 
-import React, {PureComponent} from 'react';
+import * as React from 'react'
+import { PureComponent } from 'react';
 import {GestureResponderEvent, PanResponder, PanResponderGestureState, PanResponderInstance, View, InteractionManager} from 'react-native';
 import SectionListItem from './SectionListItem';
 import Toast from "./Toast";
@@ -57,7 +58,7 @@ class AlphabetListView extends PureComponent<IProps, State> {
   onTouchChange = (e: GestureResponderEvent, gestureState: PanResponderGestureState) => {
     const itemHeight = this.props.contentHeight / this.props.titles.length;
 
-    const event = e.nativeEvent || {};
+    const event: any = e.nativeEvent || {};
     const index = Math.floor((event.pageY - this.props.pageY) / itemHeight);
 
     if (index >= 0 && index <= (this.props.titles.length - 1)) {
