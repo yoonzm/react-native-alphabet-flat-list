@@ -3,3 +3,4 @@
 .idea
 /built
 /node_modules
+tsconfig.tsbuildinfo
